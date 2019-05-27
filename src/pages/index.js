@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import AOS from 'aos';
 // import { Link } from "gatsby"
 
 import Layout from "../components/layout"
@@ -32,6 +33,15 @@ class IndexPage extends Component {
       }
     ]
   }
+
+  componentWillMount() {
+    AOS.init({
+      duration: 500,
+      easing: 'ease-out-quart',
+      once: false
+    });
+  }
+
   render() {
     const { works } = this.state;
 
@@ -41,7 +51,12 @@ class IndexPage extends Component {
         <h1 style={{ textAlign: 'center' }}>Featured Work</h1>
         <div className="containerCard">
           {works.map((work, index) => (
-            <div key={index} className="card">
+            <div
+              data-aos={index % 2 === 0 ? 'fade-up-right' : 'fade-up-left'}
+              data-aos-duration="1000"
+              key={index}
+              className="card"
+            >
               <center>
                 <div className="borderImage">
                   <a href={work.url} target="_blank" rel="noopener noreferrer">
